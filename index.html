@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div id="app">
+
+        <h1>A List of Books To Read</h1>
+
+        <form v-on:submit.prevent="searchBook">
+            <!--.prevent prevents normal submit behavior and keep the text-->
+            <input type="text" v-model="bookTitle" placeholder="Book Title">
+            
+                <div v-for="item in results">
+                    <button id="buttonOptions" v-on:click="selectBook(item)">
+                        <b>{{item.title}}</b> -- <em>{{item.author}}</em>
+                    </button>
+                </div>
+        </form>
+        <div class="controls">
+            <button v-on:click="showBooks()">My Books</button>
+            <button v-on:click="showReading()">Reading</button>
+            <button v-on:click="deleteRead()">Delete Read</button>
+        </div>
+        <ul>
+            <li v-for="item in toRead" draggable="true" v-on:dragstart="dragItem(item)" v-on:dragover.prevent v-on:drop="dropItem(item)">
+                <input type="checkbox" v-model="item.completed" />
+                <label v-bind:class="{ completed: item.completed }">{{ item.title }}</label> 
+                <!--if the item.completed is true then the class "completed" will be assigned-->
+                <button v-on:click="deleteItem(item)" class="delete">X</button>
+            </li>
+        </ul>
+
+    </div>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="script.js"></script>
+
+
+
+</html>
