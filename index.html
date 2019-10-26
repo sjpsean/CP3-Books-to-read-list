@@ -22,22 +22,23 @@
                 </div>
         </form>
         <div class="controls">
-            <button v-on:click="showBooks()">My Books</button>
-            <button v-on:click="showReading()">Reading</button>
-            <button v-on:click="deleteRead()">Delete Read</button>
+            <button v-on:click="deleteRead()">Delete All Read</button>
         </div>
         <ul>
             <li v-for="item in toRead" draggable="true" v-on:dragstart="dragItem(item)" v-on:dragover.prevent v-on:drop="dropItem(item)">
                 <input type="checkbox" v-model="item.completed" />
                 <label v-bind:class="{ completed: item.completed }">{{ item.title }}</label> 
                 <!--if the item.completed is true then the class "completed" will be assigned-->
-                <button v-on:click="deleteItem(item)" class="delete">X</button>
+                <button v-on:click="deleteBook(item)" class="delete">X</button>
             </li>
         </ul>
 
     </div>
 
-
+<div id="footer">
+    My Github Repo :
+    <a href="https://github.com/BYUCS260/lab-3-vue-sjpsean">Sean's Github</a>
+  </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
